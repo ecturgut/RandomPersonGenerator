@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Kullanıcı Ekleme(Oluşturma) Sayfası";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kullanıcı Oluşturma Sayfası</title>
+    <link href="~/Content/css/font.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg_wrapper">
+
+            <h1>Rastgele Kullanıcı Üretici</h1>
+
+            <div class="refresh">Buradan Yenile</div>
+           
+            <form id="myForm">
+                <input type="button" value="Buradan Kaydet" class=" btn btn-default" id="btnKaydet" />
+            </form>
+
+            <br />
+        </div>
+
+        <div class="profile_card">
+
+            <div class="profile_header"></div>
+            <div class="user_img">
+                <img src="">
+            </div>
+            <div class="title_info">Hi, My name is</div>
+            <div class="title_details"></div>
+
+            <div class="info_icons">
+                <div class="icon user_ active" data-title="Hi, My name is" data-value="Maithili Jha" id="namesurname"></div>
+                <div class="icon email_" data-title="My email address is" data-value="abcd@email.com" id="email"></div>
+                <div class="icon birthday_" data-title="My age is" data-value="7yrs" id="age"></div>
+                <div class="icon location_" data-title="My addres is" data-value="Mumbai" id="location"></div>
+                <div class="icon phone_" data-title="My phone number is " data-value="1234567890" id="phone"></div>
+                <div class="icon password_" data-title="My password is" data-value="123456" id="password"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnKaydet").click(function () {
+
+                debugger
+           
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+
+                type:"POST",
+                url: "/Home/Olusturma",
+                data: data,
+                success: function (response) {
+
+                    alert("Kayıt İşlemi Başarılı")
+                }
+
+                })
+            })
+        })
+
+    </script>
+    
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/app.js"></script>
+</body>
+
+</html>

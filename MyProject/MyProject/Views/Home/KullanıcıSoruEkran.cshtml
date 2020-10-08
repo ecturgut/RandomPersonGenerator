@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MyProject.Models.KisiSoruları>
+
+@{
+    ViewBag.Title = "KullanıcıSoruEkran";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kullanıcı Oluşturma Sayfası</title>
+    <link href="~/Content/css/font.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+
+    <style>
+        #kullanici {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #kullanici td, #kullanici th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #kullanici tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #kullanici tr:hover {
+                background-color: #4CAF50;
+            }
+
+            #kullanici th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #8c938d;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="bg_wrapper">
+            <h1> Kullanıcı Soru Listesi</h1>
+
+        </div>
+        <table id="kullanici">
+            <tr>
+                <th>
+                    Ad Soyad
+                </th>
+                <th>
+                    Soru
+                </th>
+                <th>
+                    Cevap
+                </th>
+                <th>
+                    Cevap Tarihi
+                </th>
+                <th>
+                    Diğer İşlemler
+                </th>
+            </tr>
+
+            <tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kisi.AdSoyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soru.SoruAd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cevap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CevapTarihi)
+        </td>
+        <td>
+            <a class="btn btn-danger" href="@Url.Action("SoruSil", new { id = item.ID })"><i class="fa fa-trash" aria-hidden="true"></i> Sil</a>
+        </td>
+    </tr>
+            }
+
+
+            </table>
+        </div>
+    </body>
+</html>

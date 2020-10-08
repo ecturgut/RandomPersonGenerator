@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KullaniciDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kisi">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdSoyad" Type="nvarchar" MaxLength="35" />
+    <Property Name="Email" Type="nvarchar" MaxLength="35" />
+    <Property Name="Yas" Type="nvarchar" MaxLength="10" />
+    <Property Name="Konum" Type="nvarchar" MaxLength="20" />
+    <Property Name="Telefon" Type="nvarchar" MaxLength="20" />
+    <Property Name="Parola" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="KisiSoruları">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KisiID" Type="int" />
+    <Property Name="SoruID" Type="int" />
+    <Property Name="Cevap" Type="nvarchar" MaxLength="50" />
+    <Property Name="CevapTarihi" Type="date" />
+  </EntityType>
+  <EntityType Name="Soru">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SoruAd" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_KisiSoruları_Kisi">
+    <End Role="Kisi" Type="Self.Kisi" Multiplicity="0..1" />
+    <End Role="KisiSoruları" Type="Self.KisiSoruları" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kisi">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KisiSoruları">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KisiSoruları_Soru">
+    <End Role="Soru" Type="Self.Soru" Multiplicity="0..1" />
+    <End Role="KisiSoruları" Type="Self.KisiSoruları" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soru">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KisiSoruları">
+        <PropertyRef Name="SoruID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KullaniciDBModelStoreContainer">
+    <EntitySet Name="Kisi" EntityType="Self.Kisi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KisiSoruları" EntityType="Self.KisiSoruları" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Soru" EntityType="Self.Soru" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_KisiSoruları_Kisi" Association="Self.FK_KisiSoruları_Kisi">
+      <End Role="Kisi" EntitySet="Kisi" />
+      <End Role="KisiSoruları" EntitySet="KisiSoruları" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KisiSoruları_Soru" Association="Self.FK_KisiSoruları_Soru">
+      <End Role="Soru" EntitySet="Soru" />
+      <End Role="KisiSoruları" EntitySet="KisiSoruları" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

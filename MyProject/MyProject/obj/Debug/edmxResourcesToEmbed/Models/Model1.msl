@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KullaniciDBModelStoreContainer" CdmEntityContainer="KullaniciDBEntities">
+    <EntitySetMapping Name="Kisi">
+      <EntityTypeMapping TypeName="KullaniciDBModel.Kisi">
+        <MappingFragment StoreEntitySet="Kisi">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Yas" ColumnName="Yas" />
+          <ScalarProperty Name="Konum" ColumnName="Konum" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Parola" ColumnName="Parola" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KisiSoruları">
+      <EntityTypeMapping TypeName="KullaniciDBModel.KisiSoruları">
+        <MappingFragment StoreEntitySet="KisiSoruları">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="SoruID" ColumnName="SoruID" />
+          <ScalarProperty Name="Cevap" ColumnName="Cevap" />
+          <ScalarProperty Name="CevapTarihi" ColumnName="CevapTarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soru">
+      <EntityTypeMapping TypeName="KullaniciDBModel.Soru">
+        <MappingFragment StoreEntitySet="Soru">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SoruAd" ColumnName="SoruAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

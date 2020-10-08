@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KullaniciDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kisi">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdSoyad" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+    <Property Name="Yas" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Konum" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Parola" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KisiSoruları" Relationship="Self.FK_KisiSoruları_Kisi" FromRole="Kisi" ToRole="KisiSoruları" />
+  </EntityType>
+  <EntityType Name="KisiSoruları">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiID" Type="Int32" />
+    <Property Name="SoruID" Type="Int32" />
+    <Property Name="Cevap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CevapTarihi" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Kisi" Relationship="Self.FK_KisiSoruları_Kisi" FromRole="KisiSoruları" ToRole="Kisi" />
+    <NavigationProperty Name="Soru" Relationship="Self.FK_KisiSoruları_Soru" FromRole="KisiSoruları" ToRole="Soru" />
+  </EntityType>
+  <EntityType Name="Soru">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SoruAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KisiSoruları" Relationship="Self.FK_KisiSoruları_Soru" FromRole="Soru" ToRole="KisiSoruları" />
+  </EntityType>
+  <Association Name="FK_KisiSoruları_Kisi">
+    <End Role="Kisi" Type="Self.Kisi" Multiplicity="0..1" />
+    <End Role="KisiSoruları" Type="Self.KisiSoruları" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kisi">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KisiSoruları">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KisiSoruları_Soru">
+    <End Role="Soru" Type="Self.Soru" Multiplicity="0..1" />
+    <End Role="KisiSoruları" Type="Self.KisiSoruları" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Soru">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KisiSoruları">
+        <PropertyRef Name="SoruID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KullaniciDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kisi" EntityType="Self.Kisi" />
+    <EntitySet Name="KisiSoruları" EntityType="Self.KisiSoruları" />
+    <EntitySet Name="Soru" EntityType="Self.Soru" />
+    <AssociationSet Name="FK_KisiSoruları_Kisi" Association="Self.FK_KisiSoruları_Kisi">
+      <End Role="Kisi" EntitySet="Kisi" />
+      <End Role="KisiSoruları" EntitySet="KisiSoruları" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KisiSoruları_Soru" Association="Self.FK_KisiSoruları_Soru">
+      <End Role="Soru" EntitySet="Soru" />
+      <End Role="KisiSoruları" EntitySet="KisiSoruları" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

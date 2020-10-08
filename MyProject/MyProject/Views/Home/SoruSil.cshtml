@@ -1,0 +1,77 @@
+﻿@model MyProject.Models.KisiSoruları
+@{
+    ViewBag.Title = "SoruSil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kullanıcı Oluşturma Sayfası</title>
+    <link href="~/Content/css/font.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+</head>
+
+
+<body>
+    <h1>Listeden Soru silme Sayfası</h1>
+
+    <h3>Bu soruyu silmek istediğinizden emin misiniz?</h3>
+
+    <div>
+        <h4>Soru Bilgileri</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Ad Soyad
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Kisi.AdSoyad)
+            </dd>
+
+            <dt>
+                Soru Adı
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Soru.SoruAd)
+            </dd>
+
+            <dt>
+                Cevap
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cevap)
+            </dd>
+
+            <dt>
+                Cevap Tarihi
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CevapTarihi)
+            </dd>          
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Seçili Soru Kaydını Sil" class="btn btn-default" /> |
+                @Html.ActionLink("Kullanıcı - Soru Listesine Geri Dön", "KullanıcıSoruEkran")
+            </div>
+        }
+    </div>
+
+</body>
+
+</html>
+
+
+
