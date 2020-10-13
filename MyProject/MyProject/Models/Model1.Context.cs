@@ -28,12 +28,5 @@ namespace MyProject.Models
         public virtual DbSet<Kisi> Kisi { get; set; }
         public virtual DbSet<KisiSoruları> KisiSoruları { get; set; }
         public virtual DbSet<Soru> Soru { get; set; }
-        public int ID { get; internal set; }
-        public string AdSoyad { get; internal set; }
-        public string Email { get; internal set; }
-        public string Yas { get; internal set; }
-        public string Konum { get; internal set; }
-        public string Telefon { get; internal set; }
-        public string Parola { get; internal set; }
     }
 }

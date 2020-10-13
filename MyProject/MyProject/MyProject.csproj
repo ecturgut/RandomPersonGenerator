@@ -144,6 +144,7 @@
     <Compile Include="Models\KisiSoruları.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KisiViewModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -247,11 +248,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Listeleme.cshtml" />
-    <Content Include="Views\Home\SoruKullanıcı.cshtml" />
-    <Content Include="Views\Home\Olusturma.cshtml" />
+    <Content Include="Views\Home\KullaniciListeleme.cshtml" />
+    <Content Include="Views\Home\SoruKullaniciSecme.cshtml" />
+    <Content Include="Views\Home\KullaniciOlusturma.cshtml" />
     <Content Include="Views\Home\ListedenKullaniciSil.cshtml" />
-    <Content Include="Views\Home\KullanıcıSoruEkran.cshtml" />
+    <None Include="Views\Home\KullaniciSoruEkrani.cshtml" />
     <Content Include="Views\Home\SoruSil.cshtml" />
   </ItemGroup>
   <ItemGroup>

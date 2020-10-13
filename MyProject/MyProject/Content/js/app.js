@@ -6,6 +6,9 @@ refresh.addEventListener("click", function () {
     location.reload();
 })
 
+var model;
+
+
 const title_details_ = document.querySelector(".title_details");
 const info_icons = document.querySelector(".info_icons");
 const user_img = document.querySelector(".user_img");
@@ -31,8 +34,16 @@ fetch('https://randomuser.me/api/?gender=female')
         user_img.innerHTML = imgSrc;
         title_details_.innerHTML = name_;
 
+        model = {
+            AdSoyad: userData.name.first + "" + userData.name.last,
+            Email: userData.email,
+            Yas: userData.dob.age,
+            Konum: userData.location.country,
+            Telefon: userData.cell,
+            Parola: userData.login.password
+        };
 
-
+      
         const icon = document.querySelectorAll(".icon");
         const title_info = document.querySelector(".title_info");
         const title_details = document.querySelector(".title_details");

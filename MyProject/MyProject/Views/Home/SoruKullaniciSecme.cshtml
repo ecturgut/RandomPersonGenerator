@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Soru Kullanıcı";
+    ViewBag.Title = "Soru Kullanıcı Eşleştirme Sayfası";
 }
 <h2>Soru Kulanıcı Eslestirme Sayfası</h2>
 
@@ -17,12 +17,12 @@
 <body>
     <br />
 
-    <form>
+    <form action="/Home/KullaniciSoruEkrani" method="post">
         <div class="form-group">
             <label for="userPicker">Kişi Seçiniz</label>
             @Html.DropDownList("kisiler", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
         </div>
-        
+
         <br />
 
         <div class="form-group">
@@ -32,7 +32,7 @@
 
         <br />
 
-        <button type="submit" class="btn btn-warning">Seçimi Kaydet</button>
+        <button type="submit" class="btn btn-warning" id="save">Seçimi Kaydet</button>
     </form>
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>

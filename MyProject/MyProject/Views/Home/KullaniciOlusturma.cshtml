@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MyProject.Models.Kisi
+@{
     ViewBag.Title = "Kullanıcı Ekleme(Oluşturma) Sayfası";
 }
 
@@ -21,12 +22,12 @@
             <h1>Rastgele Kullanıcı Üretici</h1>
 
             <div class="refresh">Buradan Yenile</div>
-           
-            <form id="myForm">
-                <input type="button" value="Buradan Kaydet" class=" btn btn-default" id="btnKaydet" />
-            </form>
 
-            <br />
+        </div>
+
+
+        <div>
+            <input type="button" value="Buradan Kaydet" class=" btn btn-default" id="btnKaydet" />
         </div>
 
         <div class="profile_card">
@@ -48,9 +49,13 @@
 
             </div>
 
+
         </div>
 
+
     </div>
+
+    
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
@@ -59,26 +64,22 @@
 
             $("#btnKaydet").click(function () {
 
-                debugger
-           
-            var data = $("#myForm").serialize();
+                $.ajax({
 
-            $.ajax({
+                    type: "POST",
+                    url: "/Home/Olusturma",
+                    data: model,
+                    success: function (response) {
 
-                type:"POST",
-                url: "/Home/Olusturma",
-                data: data,
-                success: function (response) {
-
-                    alert("Kayıt İşlemi Başarılı")
-                }
+                        alert("Kayıt İşlemi Başarılı")
+                    }
 
                 })
             })
         })
 
     </script>
-    
+
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/js/app.js"></script>
