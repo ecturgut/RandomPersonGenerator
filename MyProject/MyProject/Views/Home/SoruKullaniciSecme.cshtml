@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MyProject.Models.KisiSoruları
+@{
     ViewBag.Title = "Soru Kullanıcı Eşleştirme Sayfası";
 }
 <h2>Soru Kulanıcı Eslestirme Sayfası</h2>
@@ -17,25 +18,72 @@
 <body>
     <br />
 
-    <form action="/Home/KullaniciSoruEkrani" method="post">
-        <div class="form-group">
-            <label for="userPicker">Kişi Seçiniz</label>
-            @Html.DropDownList("kisiler", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
-        </div>
+    @using (Html.BeginForm("SoruKullaniciSecme", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
+    {
+        @Html.AntiForgeryToken()
+        
+            <div class="form-group" id="kisiSec">
+                <label for="userPicker">Kişi Seçiniz</label>
+                @Html.DropDownList("kisiler" ,new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
+            </div>
 
-        <br />
+            <br />
 
-        <div class="form-group">
-            <label for="qustionPicker">Soru Seç</label>
-            @Html.DropDownList("sorular", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
-        </div>
+            <div class="form-group" id="soruSec">
+                <label for="qustionPicker">Soru Seç</label>
+                @Html.DropDownList("sorular", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
+            </div>
 
-        <br />
+            <br />
 
-        <button type="submit" class="btn btn-warning" id="save">Seçimi Kaydet</button>
-    </form>
+            <input type="submit" value="Seçimi Kaydet" class="btn btn-warning" id="btnSaveData" />
+
+       
+    }
+
+
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @*<script>
+            $(document).ready(function ()
+            {
+                $('#btnSaveData').click(function () {
+                    var kisiSorulari = {};
+                    kisiSorulari.Kisi = $('#kisiSec').val();
+                    kisiSorulari.Soru = $('#soruSec').val();
+                })
+                $.ajax({
+                    url: 'Home/SoruKullaniciSecme',
+                    method: post,
+                    contentType: 'application/json;charset=utf-8',
+                    data: '{m:' + JSON.stringify(kisiSorulari) +' }',
+                    success: function (response) { alert("Kayıt İşlemi Başarılı")}
+
+                })
+            })
+        </script>*@
+
+    <script>
+        $(document).ready(function () {
+
+            $("#btnSaveData").click(function () {
+                var data = $("SubmitForm").serialize();
+                $.ajax({
+
+                    type: "POST",
+                    url: "/Home/SoruKullaniciSecme",
+                    data: veri,
+                    success: function (rs) {
+
+                        alert("Kayıt İşlemi Başarılı")
+                    }
+
+                })
+            })
+        })
+
+    </script>
+
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/js/app.js"></script>

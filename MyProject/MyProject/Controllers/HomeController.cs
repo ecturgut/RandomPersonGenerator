@@ -9,6 +9,8 @@ using System.Data;
 using System.Data.SqlClient;
 using LinqToDB;
 using System.Data.Entity;
+using Microsoft.Ajax.Utilities;
+using System.Web.Razor.Text;
 
 namespace MyProject.Controllers
 {
@@ -137,6 +139,7 @@ namespace MyProject.Controllers
             return View();
         }
 
+
         [HttpPost]
         public ActionResult SoruKullaniciSecme(KisiSoruları m)
         {
@@ -152,6 +155,7 @@ namespace MyProject.Controllers
 
             return RedirectToAction("KullaniciSoruEkrani", kisiSoru);
         }
+
 
         public ActionResult KullaniciSoruEkrani()
         {

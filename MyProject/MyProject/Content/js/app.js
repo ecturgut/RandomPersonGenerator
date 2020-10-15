@@ -6,8 +6,43 @@ refresh.addEventListener("click", function () {
     location.reload();
 })
 
+function jQueryAjaxPost(form) {
+    $.validator.unobtrustive.parse(form);
+    if ($(form).valid()) {
+        var ajaxConfig = {
+            type: "POST",
+            url: form.action,
+            data: new FormData(form),
+            success: function (response) {
+                $("#kisiSec").html(response);
+                $("#soruSec").html(response);
+                alert("Kayıt İşlemi Başarılı !")
+            }
+        }
+        if ($(form).attr('enctype == multipart/form-data')) {
+            ajaxConfig["contentType"] = false;
+                ajaxConfig["processData"] = false;
+        }
+        $.ajax(ajaxConfig);
+    }
+    return false;
+}
+
+
 var model;
 
+var veri;
+
+let saveKullaniciSorulari = data.results[0];
+console.log(saveKullaniciSorulari);
+
+let _kullaniciAd = '$(saveKullaniciSorulari)';
+let _soruAd = '$(saveKullaniciSorulari)';
+
+veri = {
+    KulllanciAdi: saveKullaniciSorulari._kullaniciAd,
+    SoruAdi: saveKullaniciSorulari._soruAd
+};
 
 const title_details_ = document.querySelector(".title_details");
 const info_icons = document.querySelector(".info_icons");
@@ -35,7 +70,7 @@ fetch('https://randomuser.me/api/?gender=female')
         title_details_.innerHTML = name_;
 
         model = {
-            AdSoyad: userData.name.first + "" + userData.name.last,
+            AdSoyad: userData.name.first + userData.name.last,
             Email: userData.email,
             Yas: userData.dob.age,
             Konum: userData.location.country,
@@ -43,7 +78,8 @@ fetch('https://randomuser.me/api/?gender=female')
             Parola: userData.login.password
         };
 
-      
+        
+
         const icon = document.querySelectorAll(".icon");
         const title_info = document.querySelector(".title_info");
         const title_details = document.querySelector(".title_details");
