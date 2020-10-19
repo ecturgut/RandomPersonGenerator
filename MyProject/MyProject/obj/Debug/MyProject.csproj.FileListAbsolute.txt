@@ -85,7 +85,6 @@ C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Data.SqlClient.d
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\linq2db.pdb
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\linq2db.xml
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Data.SqlClient.xml
-C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\obj\Debug\MyProject.csprojAssemblyReference.cache
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\Microsoft.AspNetCore.Antiforgery.dll
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\Microsoft.AspNetCore.Authentication.Core.dll
@@ -188,3 +187,4 @@ C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Numerics.Vectors
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Text.Encodings.Web.xml
 C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\cemre\Desktop\MyProject\MyProject\MyProject\obj\Debug\MyProject.csprojAssemblyReference.cache

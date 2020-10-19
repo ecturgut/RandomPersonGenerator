@@ -147,8 +147,8 @@ namespace MyProject.Controllers
             m.Kisi = m.Kisi;
             m.Soru = m.Soru;
             m.Cevap = m.Cevap;
-            m.CevapTarihi = m.CevapTarihi;
             m.CevapTarihi = DateTime.Now;
+
             db.KisiSoruları.Add(m);
             db.SaveChanges();
 
