@@ -34,9 +34,12 @@
                 @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
             </div>
 
-            <textarea name="cevap">
+            <br />
 
-</textarea>
+            <div class="form-group" id="cevap">
+                @Html.TextArea("Cevap", "Lütfen cevabınızı yazınız.", new { @class = "form-control" })
+                @*<textarea name="cevap" style="width:300px; height:200px;"></textarea>*@
+            </div>
 
             <br />
 

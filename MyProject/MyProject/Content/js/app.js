@@ -15,7 +15,7 @@ const info_icons = document.querySelector(".info_icons");
 const user_img = document.querySelector(".user_img");
 
 //fetching api data
-fetch('https://randomuser.me/api/?gender=female')
+fetch('https://randomuser.me/api/?results=10&nat=tr')
     .then(response => response.json())
     .then(function (data) {
 
