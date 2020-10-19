@@ -6,43 +6,9 @@ refresh.addEventListener("click", function () {
     location.reload();
 })
 
-function jQueryAjaxPost(form) {
-    $.validator.unobtrustive.parse(form);
-    if ($(form).valid()) {
-        var ajaxConfig = {
-            type: "POST",
-            url: form.action,
-            data: new FormData(form),
-            success: function (response) {
-                $("#kisiSec").html(response);
-                $("#soruSec").html(response);
-                alert("Kayıt İşlemi Başarılı !")
-            }
-        }
-        if ($(form).attr('enctype == multipart/form-data')) {
-            ajaxConfig["contentType"] = false;
-                ajaxConfig["processData"] = false;
-        }
-        $.ajax(ajaxConfig);
-    }
-    return false;
-}
 
 
 var model;
-
-var veri;
-
-let saveKullaniciSorulari = data.results[0];
-console.log(saveKullaniciSorulari);
-
-let _kullaniciAd = '$(saveKullaniciSorulari)';
-let _soruAd = '$(saveKullaniciSorulari)';
-
-veri = {
-    KulllanciAdi: saveKullaniciSorulari._kullaniciAd,
-    SoruAdi: saveKullaniciSorulari._soruAd
-};
 
 const title_details_ = document.querySelector(".title_details");
 const info_icons = document.querySelector(".info_icons");

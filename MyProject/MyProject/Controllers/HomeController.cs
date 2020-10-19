@@ -143,17 +143,16 @@ namespace MyProject.Controllers
         [HttpPost]
         public ActionResult SoruKullaniciSecme(KisiSoruları m)
         {
-            KisiSoruları kisiSoru = new KisiSoruları();
 
-            kisiSoru.Kisi = m.Kisi;
-            kisiSoru.Soru = m.Soru;
-            kisiSoru.KisiID = m.KisiID;
-            kisiSoru.SoruID = m.SoruID;
+            m.Kisi = m.Kisi;
+            m.Soru = m.Soru;
 
-            db.KisiSoruları.Add(kisiSoru);
+
+
+            db.KisiSoruları.Add(m);
             db.SaveChanges();
 
-            return RedirectToAction("KullaniciSoruEkrani", kisiSoru);
+            return RedirectToAction("SoruKullaniciSecme");
         }
 
 

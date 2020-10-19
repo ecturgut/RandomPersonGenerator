@@ -18,21 +18,25 @@
 <body>
     <br />
 
-    @using (Html.BeginForm("SoruKullaniciSecme", "Home", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))
+    @using (Html.BeginForm("SoruKullaniciSecme", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         
             <div class="form-group" id="kisiSec">
                 <label for="userPicker">Kişi Seçiniz</label>
-                @Html.DropDownList("kisiler" ,new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
+                @Html.DropDownList("KisiID", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
             </div>
 
             <br />
 
             <div class="form-group" id="soruSec">
                 <label for="qustionPicker">Soru Seç</label>
-                @Html.DropDownList("sorular", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
+                @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
             </div>
+
+            <textarea name="cevap">
+
+</textarea>
 
             <br />
 
@@ -62,27 +66,6 @@
                 })
             })
         </script>*@
-
-    <script>
-        $(document).ready(function () {
-
-            $("#btnSaveData").click(function () {
-                var data = $("SubmitForm").serialize();
-                $.ajax({
-
-                    type: "POST",
-                    url: "/Home/SoruKullaniciSecme",
-                    data: veri,
-                    success: function (rs) {
-
-                        alert("Kayıt İşlemi Başarılı")
-                    }
-
-                })
-            })
-        })
-
-    </script>
 
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
