@@ -22,13 +22,13 @@
             <h1>Rastgele Kullanıcı Üretici</h1>
 
             <div class="refresh">Buradan Yenile</div>
-
         </div>
-
 
         <div>
-            <input type="button" value="Buradan Kaydet" class=" btn btn-default" id="btnKaydet" />
+            <input type="button" value="Buradan Kaydet" class=" btn btn-warning" style="height:50px" width="400" id="btnKaydet" />
         </div>
+
+
 
         <div class="profile_card">
 
@@ -55,34 +55,32 @@
 
     </div>
 
-    
+
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/app.js"></script>
     <script>
         $(document).ready(function () {
-
             $("#btnKaydet").click(function () {
-
                 $.ajax({
-
                     type: "POST",
                     url: "/Home/KullaniciOlusturma",
-                    data: model,
+                    data: JSON.stringify(model),
+                    contentType: "application/json",
+                    dataType: 'json',
                     success: function (response) {
-
                         alert("Kayıt İşlemi Başarılı")
                     }
-
                 })
             })
         })
 
+
     </script>
 
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Content/js/app.js"></script>
+
 </body>
 
 </html>

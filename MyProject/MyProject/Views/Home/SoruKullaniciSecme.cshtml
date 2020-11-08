@@ -21,54 +21,38 @@
     @using (Html.BeginForm("SoruKullaniciSecme", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
+        //Random rnd = new Random();
+        //rnd.Next(0, );
+        <div class="form-group" id="kisiSec">
+            <label for="userPicker">Rastgele Seçilen Kisi</label>
+            @Html.DropDownList("KisiID", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
+        </div>
+
+        <br />
+ 
+        <div class="form-group" id="soruSec">
+            <label for="qustionPicker">Rasgele Secilen Soru</label>          
+            @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
+        </div>
+
+
+        <br />
+
+        <div class="form-group" id="cevap">
+            <label for="answer">Lütfen Cevap Yazınız</label>
+            @Html.TextArea("Cevap", new { @class = "form-control" })
+        </div>
         
-            <div class="form-group" id="kisiSec">
-                <label for="userPicker">Kişi Seçiniz</label>
-                @Html.DropDownList("KisiID", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
-            </div>
+        <br />
 
-            <br />
+        <input type="submit" value="Seçimi Kaydet" class="btn btn-warning" id="btnSaveData" />
 
-            <div class="form-group" id="soruSec">
-                <label for="qustionPicker">Soru Seç</label>
-                @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
-            </div>
 
-            <br />
-
-            <div class="form-group" id="cevap">
-                @Html.TextArea("Cevap", "Lütfen cevabınızı yazınız.", new { @class = "form-control" })
-            </div>
-
-            <br />
-
-            <input type="submit" value="Seçimi Kaydet" class="btn btn-warning" id="btnSaveData" />
-
-       
     }
 
 
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    @*<script>
-            $(document).ready(function ()
-            {
-                $('#btnSaveData').click(function () {
-                    var kisiSorulari = {};
-                    kisiSorulari.Kisi = $('#kisiSec').val();
-                    kisiSorulari.Soru = $('#soruSec').val();
-                })
-                $.ajax({
-                    url: 'Home/SoruKullaniciSecme',
-                    method: post,
-                    contentType: 'application/json;charset=utf-8',
-                    data: '{m:' + JSON.stringify(kisiSorulari) +' }',
-                    success: function (response) { alert("Kayıt İşlemi Başarılı")}
-
-                })
-            })
-        </script>*@
-
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Content/js/app.js"></script>

@@ -1,5 +1,5 @@
 ﻿//https://randomuser.me/api/?gender=female
-
+var random_soru = Math.random();
 //reload page
 const refresh = document.querySelector(".refresh");
 refresh.addEventListener("click", function () {
@@ -7,8 +7,7 @@ refresh.addEventListener("click", function () {
 })
 
 
-
-var model;
+var model = [];
 
 const title_details_ = document.querySelector(".title_details");
 const info_icons = document.querySelector(".info_icons");
@@ -20,6 +19,8 @@ fetch('https://randomuser.me/api/?results=10&nat=tr')
     .then(function (data) {
 
         let userData = data.results[0];
+
+        //bak burası hatalı tek kişinin verisini almışsın ekran görüntüsünü görebilir miiym
         console.log(userData);
         let imgSrc = `<img src="${userData.picture.large}">`;
         let name_ = `${userData.name.first} ${userData.name.last}`;
@@ -35,16 +36,18 @@ fetch('https://randomuser.me/api/?results=10&nat=tr')
         user_img.innerHTML = imgSrc;
         title_details_.innerHTML = name_;
 
-        model = {
-            AdSoyad: userData.name.first + userData.name.last,
-            Email: userData.email,
-            Yas: userData.dob.age,
-            Konum: userData.location.country,
-            Telefon: userData.cell,
-            Parola: userData.login.password
-        };
-
-        
+        for (var i = 0; i < data.results.length; i++) {
+            model.push({
+                AdSoyad: data.results[i].name.first + data.results[i].name.last,
+                Email: data.results[i].email,
+                Yas: data.results[i].dob.age,
+                Konum: data.results[i].location.country,
+                Telefon: data.results[i].cell,
+                Parola: data.results[i].login.password
+            });
+        }
+        console.log('models ======>',model);
+       
 
         const icon = document.querySelectorAll(".icon");
         const title_info = document.querySelector(".title_info");

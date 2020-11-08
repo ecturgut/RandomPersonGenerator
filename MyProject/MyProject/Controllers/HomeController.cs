@@ -31,29 +31,32 @@ namespace MyProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult KullaniciOlusturma(Kisi model)
+        public ActionResult KullaniciOlusturma(Kisi[] modelList)
         {
 
             KullaniciDBEntities db = new KullaniciDBEntities();
             List<Kisi> kL = db.Kisi.ToList();
+
             ViewBag.kisiList = new SelectList(kL, "AdSoyad", "Email", "Yas", "Konum", "Telefon", "Parola");
+            List<Kisi> eklenenList = new List<Kisi>();
+            foreach (var model in modelList)
+            {
+                Kisi k = new Kisi();
 
-            Kisi k = new Kisi();
+                k.ID = model.ID;
+                k.AdSoyad = model.AdSoyad;
+                k.Email = model.Email;
+                k.Yas = model.Yas;
+                k.Konum = model.Konum;
+                k.Telefon = model.Telefon;
+                k.Parola = model.Parola;
 
-            k.ID = model.ID;
-            k.AdSoyad = model.AdSoyad;
-            k.Email = model.Email;
-            k.Yas = model.Yas;
-            k.Konum = model.Konum;
-            k.Telefon = model.Telefon;
-            k.Parola = model.Parola;
+                db.Kisi.Add(k);
+                db.SaveChanges();
+                eklenenList.Add(k);
+            }
+            return RedirectToAction("KullaniciListeleme", eklenenList);
 
-
-            db.Kisi.Add(k);
-            db.SaveChanges();
-
-
-            return RedirectToAction("KullaniciListeleme", k);
         }
 
         public ActionResult SoruSil(int? id)
@@ -117,11 +120,10 @@ namespace MyProject.Controllers
         public ActionResult SoruKullaniciSecme()
         {
             KullaniciDBEntities db = new KullaniciDBEntities();
-
             List<SelectListItem> kisi = new List<SelectListItem>();
-
             foreach (var item in db.Kisi.ToList())
             {
+
                 kisi.Add(new SelectListItem { Text = item.AdSoyad, Value = item.ID.ToString() });
             }
 
@@ -133,7 +135,24 @@ namespace MyProject.Controllers
             {
                 soru.Add(new SelectListItem { Text = item.SoruAd, Value = item.ID.ToString() });
             }
+            //System.Random rnd = new Random();
 
+            //for (int i = 1; i <= item; i++)
+            //{
+            //    int index = rnd.Next(RandomKisi.Count);
+            //    RandomKisi.Add(RandomKisi[index]);
+            //}
+
+            //ViewBag.kisiler = kisi;
+
+            //List<Soru> soru = new List<Soru>();
+
+            //for (int i = 1; i <= item; i++)
+            //{
+            //    int index = rnd.Next(RandomSoru.Count);
+            //    RandomSoru.Add(RandomSoru[index]);
+            //ViewBag.sorular = soru;
+            //}
             ViewBag.sorular = soru;
 
             return View();
