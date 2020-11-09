@@ -11,6 +11,9 @@ using LinqToDB;
 using System.Data.Entity;
 using Microsoft.Ajax.Utilities;
 using System.Web.Razor.Text;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Dynamic;
+using System.Windows.Forms;
 
 namespace MyProject.Controllers
 {
@@ -31,15 +34,12 @@ namespace MyProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult KullaniciOlusturma(Kisi[] modelList)
+        public ActionResult KullaniciOlusturma(List<Kisi> modelList)
         {
 
             KullaniciDBEntities db = new KullaniciDBEntities();
-            List<Kisi> kL = db.Kisi.ToList();
-
-            ViewBag.kisiList = new SelectList(kL, "AdSoyad", "Email", "Yas", "Konum", "Telefon", "Parola");
             List<Kisi> eklenenList = new List<Kisi>();
-            foreach (var model in modelList)
+            foreach (Kisi model in modelList)
             {
                 Kisi k = new Kisi();
 
@@ -56,6 +56,7 @@ namespace MyProject.Controllers
                 eklenenList.Add(k);
             }
             return RedirectToAction("KullaniciListeleme", eklenenList);
+
 
         }
 
@@ -116,44 +117,42 @@ namespace MyProject.Controllers
             db.SaveChanges();
             return RedirectToAction("KullaniciListeleme");
         }
-
+        
         public ActionResult SoruKullaniciSecme()
         {
             KullaniciDBEntities db = new KullaniciDBEntities();
             List<SelectListItem> kisi = new List<SelectListItem>();
+
+
+            Random rand = new Random();
+            int id = rand.Next(db.Kisi.ToList().Count);
+            int i = 0;
             foreach (var item in db.Kisi.ToList())
             {
+                    kisi.Add(new SelectListItem { Text = item.AdSoyad, Value = item.ID.ToString(), Selected = false });
 
-                kisi.Add(new SelectListItem { Text = item.AdSoyad, Value = item.ID.ToString() });
             }
 
+
             ViewBag.kisiler = kisi;
+
+            Random rnd = new Random();
+            int r = rnd.Next(ViewBag.kisiler.Count);
+            TempData["r"] = r;
+            TempData["kisi"] = kisi;
 
             List<SelectListItem> soru = new List<SelectListItem>();
 
             foreach (var item in db.Soru.ToList())
             {
                 soru.Add(new SelectListItem { Text = item.SoruAd, Value = item.ID.ToString() });
+                
             }
-            //System.Random rnd = new Random();
 
-            //for (int i = 1; i <= item; i++)
-            //{
-            //    int index = rnd.Next(RandomKisi.Count);
-            //    RandomKisi.Add(RandomKisi[index]);
-            //}
-
-            //ViewBag.kisiler = kisi;
-
-            //List<Soru> soru = new List<Soru>();
-
-            //for (int i = 1; i <= item; i++)
-            //{
-            //    int index = rnd.Next(RandomSoru.Count);
-            //    RandomSoru.Add(RandomSoru[index]);
-            //ViewBag.sorular = soru;
-            //}
             ViewBag.sorular = soru;
+            Random x = new Random();
+            int y = rnd.Next(ViewBag.sorular.Count);
+            TempData["y"] = y;
 
             return View();
         }

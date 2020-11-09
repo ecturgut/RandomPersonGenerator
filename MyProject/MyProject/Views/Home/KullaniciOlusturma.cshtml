@@ -22,13 +22,11 @@
             <h1>Rastgele Kullanıcı Üretici</h1>
 
             <div class="refresh">Buradan Yenile</div>
+            <div class="add" id="btnKaydet">Buradan Kaydet</div>
         </div>
 
         <div>
-            <input type="button" value="Buradan Kaydet" class=" btn btn-warning" style="height:50px" width="400" id="btnKaydet" />
         </div>
-
-
 
         <div class="profile_card">
 
@@ -47,7 +45,7 @@
                 <div class="icon phone_" data-title="My phone number is " data-value="1234567890" id="phone"></div>
                 <div class="icon password_" data-title="My password is" data-value="123456" id="password"></div>
 
-            </div>
+            </div> a
 
 
         </div>
@@ -64,14 +62,17 @@
     <script>
         $(document).ready(function () {
             $("#btnKaydet").click(function () {
+                if (model_ready == 0) {
+                    return;
+                }
                 $.ajax({
                     type: "POST",
                     url: "/Home/KullaniciOlusturma",
-                    data: JSON.stringify(model),
-                    contentType: "application/json",
+                    data: model,
                     dataType: 'json',
-                    success: function (response) {
-                        alert("Kayıt İşlemi Başarılı")
+                    contentType: 'application/json',
+                    complete: () => {
+                        alert("Kayıt İşlemi Başarılı");
                     }
                 })
             })

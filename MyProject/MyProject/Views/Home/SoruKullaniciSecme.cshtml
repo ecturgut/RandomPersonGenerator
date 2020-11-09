@@ -15,34 +15,45 @@
     <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
 
+
 <body>
     <br />
 
     @using (Html.BeginForm("SoruKullaniciSecme", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        //Random rnd = new Random();
-        //rnd.Next(0, );
-        <div class="form-group" id="kisiSec">
-            <label for="userPicker">Rastgele Seçilen Kisi</label>
-            @Html.DropDownList("KisiID", new SelectList(ViewBag.kisiler, "Value", "Text"), "Lütfen bir kişi seçiniz", new { @class = "form-control" })
-        </div>
+
+<div class="form-group" id="kisiSec">
+    <label for="userPicker">Rastgele Seçilen Kisi</label>
+    @{ 
+        Random rand = new Random();
+        int id = rand.Next(ViewBag.kisiler.Count);
+        int soru_id = rand.Next(ViewBag.sorular.Count);
+
+        SelectList list = new SelectList(ViewBag.kisiler, "Value", "Text", ViewBag.kisiler[id].Value);
+    }
+    <label for="userPicker">Rastgele Seçilen Kisi</label>
+    @Html.DropDownList("KisiID", list, "Lütfen bir kişi seçiniz", new { @class = "form-control" })
+    
+    
+    
+
+</div>
 
         <br />
- 
+
         <div class="form-group" id="soruSec">
-            <label for="qustionPicker">Rasgele Secilen Soru</label>          
-            @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text"), "Lütfen bir soru seçiniz", new { @class = "form-control" })
+            <label for="qustionPicker">Rasgele Secilen Soru</label>
+            @Html.DropDownList("SoruID", new SelectList(ViewBag.sorular, "Value", "Text", ViewBag.sorular[soru_id].Value), "Lütfen bir soru seçiniz", new { @class = "form-control" })
         </div>
-
-
-        <br />
+      
+       
 
         <div class="form-group" id="cevap">
             <label for="answer">Lütfen Cevap Yazınız</label>
             @Html.TextArea("Cevap", new { @class = "form-control" })
         </div>
-        
+
         <br />
 
         <input type="submit" value="Seçimi Kaydet" class="btn btn-warning" id="btnSaveData" />

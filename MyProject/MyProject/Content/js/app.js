@@ -8,6 +8,7 @@ refresh.addEventListener("click", function () {
 
 
 var model = [];
+let model_ready = 0;
 
 const title_details_ = document.querySelector(".title_details");
 const info_icons = document.querySelector(".info_icons");
@@ -20,7 +21,6 @@ fetch('https://randomuser.me/api/?results=10&nat=tr')
 
         let userData = data.results[0];
 
-        //bak burası hatalı tek kişinin verisini almışsın ekran görüntüsünü görebilir miiym
         console.log(userData);
         let imgSrc = `<img src="${userData.picture.large}">`;
         let name_ = `${userData.name.first} ${userData.name.last}`;
@@ -38,14 +38,16 @@ fetch('https://randomuser.me/api/?results=10&nat=tr')
 
         for (var i = 0; i < data.results.length; i++) {
             model.push({
-                AdSoyad: data.results[i].name.first + data.results[i].name.last,
-                Email: data.results[i].email,
-                Yas: data.results[i].dob.age,
-                Konum: data.results[i].location.country,
-                Telefon: data.results[i].cell,
-                Parola: data.results[i].login.password
+                "AdSoyad": data.results[i].name.first + data.results[i].name.last,
+                "Email": data.results[i].email,
+                "Yas": data.results[i].dob.age,
+                "Konum": data.results[i].location.country,
+                "Telefon": data.results[i].cell,
+                "Parola": data.results[i].login.password
             });
         }
+        model_ready = 1;
+        model = JSON.stringify({ "modelList": model });
         console.log('models ======>',model);
        
 
